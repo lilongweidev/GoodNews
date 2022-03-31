@@ -35,6 +35,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun initData(viewModel: MainViewModel = viewModel()) {
 
