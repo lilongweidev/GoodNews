@@ -2,14 +2,17 @@ package com.llw.goodnews.repository
 
 import com.llw.goodnews.network.NetworkRequest
 import com.llw.goodnews.utils.Constant.CODE
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.Dispatchers
 import java.lang.RuntimeException
+import javax.inject.Inject
 
 /**
  * 疫情新闻
  * @author llw
  */
-object EpidemicNewsRepository : BaseRepository() {
+@ViewModelScoped
+class EpidemicNewsRepository @Inject constructor(): BaseRepository() {
 
     fun getEpidemicNews() = fire(Dispatchers.IO) {
         val epidemicNews = NetworkRequest.getEpidemicNews()
