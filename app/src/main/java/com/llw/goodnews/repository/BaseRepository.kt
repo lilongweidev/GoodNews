@@ -1,5 +1,6 @@
 package com.llw.goodnews.repository
 
+import android.util.Log
 import androidx.lifecycle.liveData
 import kotlin.coroutines.CoroutineContext
 
@@ -14,6 +15,7 @@ open class BaseRepository {
             val result = try {
                 block()
             } catch (e: Exception) {
+                Log.e("BaseRepository", "fire: "+ e.message)
                 Result.failure(e)
             }
             //通知数据变化

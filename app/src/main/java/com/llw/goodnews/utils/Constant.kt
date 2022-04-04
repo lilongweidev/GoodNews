@@ -20,4 +20,9 @@ object Constant {
      * 请求接口成功状态描述
      */
     const val SUCCESS = "success"
+
+    /**
+     * 今日请求接口返回数据的时间戳
+     */
+    const val REQUEST_TIMESTAMP = "requestTimestamp_news"
 }

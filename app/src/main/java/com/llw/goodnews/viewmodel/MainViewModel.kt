@@ -1,18 +1,14 @@
 package com.llw.goodnews.viewmodel
 
 import androidx.lifecycle.*
-import com.llw.goodnews.bean.EpidemicNews
 import com.llw.goodnews.repository.EpidemicNewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
- *
- * @description MainViewModel
+ * MainViewModel
  * @author llw
- * @date 2022/3/29 9:54
+ * @date 2022/3/29 23:54
  */
 @HiltViewModel
 class MainViewModel @Inject constructor(
@@ -20,4 +16,5 @@ class MainViewModel @Inject constructor(
 ) : ViewModel() {
 
     val result = repository.getEpidemicNews()
+
 }

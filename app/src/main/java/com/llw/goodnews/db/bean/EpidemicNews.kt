@@ -1,16 +1,22 @@
-package com.llw.goodnews.bean
+package com.llw.goodnews.db.bean
 
-data class EpidemicNews(val msg: String = "",
-                        val code: Int = 0,
-                        val newslist: List<NewslistItem>?)
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-data class NewslistItem(val news: List<NewsItem>?,
-                        val desc: Desc,
-                        val riskarea: Riskarea)
+data class EpidemicNews(
+    var msg: String = "",
+    var code: Int = 0,
+    var newslist: List<NewslistItem>?)
 
+data class NewslistItem(
+    var news: List<NewsItem>?,
+    val desc: Desc?,
+    val riskarea: Riskarea?
+)
+@Entity
 data class NewsItem(val summary: String = "",
                     val sourceUrl: String = "",
-                    val id: Int = 0,
+                    @PrimaryKey val id: Int = 0,
                     val title: String = "",
                     val pubDate: Long = 0,
                     val pubDateStr: String = "",

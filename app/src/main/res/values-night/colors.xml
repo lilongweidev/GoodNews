@@ -2,6 +2,5 @@
 <resources>
     <color name="blue700">#0068C2</color>
     <color name="blue900">#004076</color>
-    <color name="status_bar">#0068C2</color>
-    <color name="black">#000000</color>
+    <color name="status_bar">#0E0E0E</color>
 </resources>
