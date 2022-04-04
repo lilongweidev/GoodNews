@@ -44,6 +44,7 @@ class EpidemicNewsRepository @Inject constructor() : BaseRepository() {
         else Result.failure(RuntimeException("getNews response code is ${epidemicNews.code} msg is ${epidemicNews.msg}"))
     }
 
+
     /**
      * 保存到本地数据库
      */
