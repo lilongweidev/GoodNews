@@ -79,4 +79,6 @@ dependencies {
     //DataStore
     implementation "androidx.datastore:datastore-preferences:$datastore_version"
     implementation "androidx.datastore:datastore-preferences-core:$datastore_version"
+    //Swiperefresh
+    implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist_version"
 }

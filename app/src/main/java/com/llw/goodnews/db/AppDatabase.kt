@@ -1,12 +1,14 @@
 package com.llw.goodnews.db
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.llw.goodnews.App
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
+import com.llw.goodnews.db.bean.Desc
 import com.llw.goodnews.db.bean.NewsItem
+import com.llw.goodnews.db.dao.DescDao
 import com.llw.goodnews.db.dao.NewsItemDao
 
 /**
@@ -15,10 +17,14 @@ import com.llw.goodnews.db.dao.NewsItemDao
  * @author llw
  * @date 2022/4/4 1:33
  */
-@Database(entities = [NewsItem::class], version = 1, exportSchema = false)
+@Database(entities = [
+    NewsItem::class,
+    Desc::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun newsItemDao(): NewsItemDao
+
+    abstract fun descDao(): DescDao
 
     companion object {
 
@@ -30,7 +36,9 @@ abstract class AppDatabase : RoomDatabase() {
         fun getInstance(context: Context): AppDatabase {
             return instance ?: synchronized(this) {
                 instance ?: Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
-                    .build().also { instance = it }
+                    .addMigrations()
+                    .build()
+                    .also { instance = it }
             }
         }
     }

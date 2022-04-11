@@ -4,4 +4,9 @@
     <color name="blue900">#004076</color>
     <color name="status_bar">#0068C2</color>
     <color name="black">#000000</color>
+    <color name="red">#FC3538</color>
+    <color name="dark_red">#B00000</color>
+    <color name="green">#1BB394</color>
+    <color name="gray_black">#656565</color>
+    <color name="gray">#989898</color>
 </resources>

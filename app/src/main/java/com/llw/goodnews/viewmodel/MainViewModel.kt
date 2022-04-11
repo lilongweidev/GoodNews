@@ -15,6 +15,15 @@ class MainViewModel @Inject constructor(
     repository: EpidemicNewsRepository
 ) : ViewModel() {
 
-    val result = repository.getEpidemicNews()
+    private val isRefresh = MutableLiveData<Boolean>()
+
+    // 当 isRefresh 值发生改变时，会执行 repository.getEpidemicNews(it)
+    val result = Transformations.switchMap(isRefresh) {
+        repository.getEpidemicNews(it)
+    }
+
+    fun getNews(refresh: Boolean = false) {
+        isRefresh.value = refresh
+    }
 
 }
