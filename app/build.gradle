@@ -81,4 +81,6 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences-core:$datastore_version"
     //Swiperefresh
     implementation "com.google.accompanist:accompanist-swiperefresh:$accompanist_version"
+    //Compose 导航
+    implementation 'androidx.navigation:navigation-compose:2.4.1'
 }
