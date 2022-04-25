@@ -9,8 +9,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
@@ -35,8 +34,11 @@ import com.llw.goodnews.db.bean.NewsItem
 import com.llw.goodnews.db.bean.NewslistItem
 import com.llw.goodnews.db.bean.Riskarea
 import com.llw.goodnews.ui.pages.PageConstant.RISK_ZONE_DETAILS_PAGE
+import com.llw.goodnews.ui.pages.PageConstant.WEB_VIEW_PAGE
 import com.llw.goodnews.utils.showToast
 import com.llw.goodnews.viewmodel.MainViewModel
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 
 @SuppressLint("StaticFieldLeak")
 lateinit var mNavController: NavHostController
@@ -70,28 +72,18 @@ private fun MainScreen(newslistItem: NewslistItem) {
                         text = "疫情新闻",
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth(),
-                        color = MaterialTheme.colors.onSecondary
+                        color = MaterialTheme.colors.onSecondary,
                     )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { "Person".showToast() }) {
-                        Icon(
-                            imageVector = Icons.Filled.Person,
-                            contentDescription = "Person"
-                        )
-                    }
-                },
-                actions = {
-                    IconButton(onClick = { "Settings".showToast() }) {
-                        Icon(
-                            imageVector = Icons.Filled.Settings,
-                            contentDescription = "Settings",
-                        )
-                    }
                 },
                 elevation = 4.dp
             )
-        }
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = { "主页面".showToast() },
+                contentColor = Color.White,
+                content = { Icon(Icons.Filled.Home, contentDescription = "") })
+        },
+        floatingActionButtonPosition = FabPosition.End
     ) { innerPadding ->
         BodyContent(
             newslistItem.desc,
@@ -103,7 +95,8 @@ private fun MainScreen(newslistItem: NewslistItem) {
 }
 
 @Composable
-fun BodyContent(desc: Desc, riskarea: Riskarea, news: List<NewsItem>, modifier: Modifier = Modifier
+fun BodyContent(
+    desc: Desc, riskarea: Riskarea, news: List<NewsItem>, modifier: Modifier = Modifier
 ) {
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing = false),
@@ -124,7 +117,13 @@ fun BodyContent(desc: Desc, riskarea: Riskarea, news: List<NewsItem>, modifier: 
             descItem(desc)
             riskareaItem(riskarea)
             items(news) { new ->
-                Column(modifier = Modifier.padding(8.dp)) {
+                Column(modifier = Modifier
+                    .clickable {
+                        val encodedUrl =
+                            URLEncoder.encode(new.sourceUrl, StandardCharsets.UTF_8.toString())
+                        mNavController.navigate("${WEB_VIEW_PAGE}/${new.title}/$encodedUrl")
+                    }
+                    .padding(8.dp)) {
                     Text(
                         text = new.title,
                         fontWeight = FontWeight.ExtraBold,
@@ -322,7 +321,13 @@ private fun LazyListScope.riskareaItem(riskarea: Riskarea) {
                     modifier = Modifier
                         .weight(1f)
                         .clickable {
-                            mNavController.navigate("${RISK_ZONE_DETAILS_PAGE}/高风险区/${Gson().toJson(riskarea.high)}")
+                            mNavController.navigate(
+                                "${RISK_ZONE_DETAILS_PAGE}/高风险区/${
+                                    Gson().toJson(
+                                        riskarea.high
+                                    )
+                                }"
+                            )
                         }
                         .padding(0.dp, 12.dp),
                     verticalArrangement = Arrangement.Center,
@@ -354,7 +359,13 @@ private fun LazyListScope.riskareaItem(riskarea: Riskarea) {
                     modifier = Modifier
                         .weight(1f)
                         .clickable {
-                            mNavController.navigate("$RISK_ZONE_DETAILS_PAGE/中风险区/${Gson().toJson(riskarea.mid)}")
+                            mNavController.navigate(
+                                "$RISK_ZONE_DETAILS_PAGE/中风险区/${
+                                    Gson().toJson(
+                                        riskarea.mid
+                                    )
+                                }"
+                            )
                         }
                         .padding(0.dp, 12.dp),
                     verticalArrangement = Arrangement.Center,
@@ -387,5 +398,4 @@ private fun LazyListScope.riskareaItem(riskarea: Riskarea) {
 }
 
 fun Int.addSymbols(): String = if (this > 0.0 && this != 0) "+$this" else "$this"
-
 
