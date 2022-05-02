@@ -22,6 +22,9 @@ object NetworkRequest {
     //通过await()函数将getNews()函数也声明成挂起函数。使用协程
     suspend fun getEpidemicNews() = service.getEpidemicNews().await()
 
+    //获取社会新闻
+    suspend fun getSocialNews() = service.getSocialNews().await()
+
     /**
      * Retrofit网络返回处理
      */

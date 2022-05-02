@@ -87,4 +87,12 @@ dependencies {
     implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
     //图标库
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    //Coil库
+    implementation 'io.coil-kt:coil-compose:2.0.0-rc03'
+    //viewpage
+    implementation "com.google.accompanist:accompanist-pager:$accompanist_version"
+    //viewpage指示器
+    implementation "com.google.accompanist:accompanist-pager-indicators:$accompanist_version"
+
+
 }

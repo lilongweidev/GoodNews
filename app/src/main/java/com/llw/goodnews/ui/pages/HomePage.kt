@@ -1,6 +1,5 @@
 package com.llw.goodnews.ui.pages
 
-import androidx.annotation.StringRes
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideInHorizontally
@@ -8,23 +7,20 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.navigation.NavHostController
 import com.llw.goodnews.R
-import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.llw.goodnews.ui.BottomBarView
 import com.llw.goodnews.ui.pages.PageConstant.COLLECTION_ITEM
 import com.llw.goodnews.ui.pages.PageConstant.HOME_ITEM
+import com.llw.goodnews.viewmodel.HomeViewModel
 
 
 /**
@@ -33,7 +29,7 @@ import com.llw.goodnews.ui.pages.PageConstant.HOME_ITEM
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun HomePage() {
+fun HomePage(mNavController: NavHostController, homeViewModel: HomeViewModel) {
     val navController = rememberAnimatedNavController()
     Scaffold(
         topBar = {
@@ -52,7 +48,7 @@ fun HomePage() {
             )
         },
         modifier = Modifier.fillMaxSize(),
-            bottomBar = {
+        bottomBar = {
             BottomBarView(navController)
         }
     ) {
@@ -85,7 +81,7 @@ fun HomePage() {
             }
         ) {
             composable(HOME_ITEM) {
-                HomeItem()
+                HomeItem(mNavController, homeViewModel)
             }
             composable(COLLECTION_ITEM) {
                 CollectionItem()

@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.*
-import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
@@ -26,6 +24,7 @@ import com.llw.goodnews.ui.pages.PageConstant.WEB_VIEW_PAGE
 import com.llw.goodnews.ui.pages.RiskZoneDetailsPage
 import com.llw.goodnews.ui.pages.WebViewPage
 import com.llw.goodnews.ui.theme.GoodNewsTheme
+import com.llw.goodnews.viewmodel.HomeViewModel
 import com.llw.goodnews.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -45,6 +44,7 @@ class HomeActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background
                 ) {
                     val viewModel: MainViewModel = viewModel()
+                    val homeViewModel: HomeViewModel = viewModel()
                     val navController = rememberAnimatedNavController()
                     AnimatedNavHost(
                         navController = navController,
@@ -78,7 +78,7 @@ class HomeActivity : ComponentActivity() {
                     ) {
                         //主页面
                         composable(HOME_PAGE) {
-                            HomePage()
+                            HomePage(navController,homeViewModel)
                         }
                         //疫情新闻列表页面
                         composable(EPIDEMIC_NEWS_LIST_PAGE) {
