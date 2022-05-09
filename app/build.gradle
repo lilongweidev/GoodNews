@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 31
 
     defaultConfig {
         applicationId "com.llw.goodnews"
         minSdk 23
-        targetSdk 32
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -93,6 +93,15 @@ dependencies {
     implementation "com.google.accompanist:accompanist-pager:$accompanist_version"
     //viewpage指示器
     implementation "com.google.accompanist:accompanist-pager-indicators:$accompanist_version"
+    //权限库
+    implementation "com.google.accompanist:accompanist-permissions:0.18.0"
+    //Camerax
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    // If you want to additionally use the CameraX Lifecycle library
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    // If you want to additionally use the CameraX View class
+    implementation "androidx.camera:camera-view:${camerax_version}"
 
 
 }

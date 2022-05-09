@@ -18,12 +18,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import coil.ImageLoader
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.google.accompanist.pager.*
 import com.google.gson.Gson
 import com.llw.goodnews.R
@@ -50,7 +54,7 @@ private fun TabViewPager(mNavController: NavHostController, viewModel: HomeViewM
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(0.dp, 0.dp, 0.dp, 50.dp)
+            .padding(0.dp, 0.dp, 0.dp, 48.dp)
     ) {
         val pages by mutableStateOf(
             listOf("社会", "军事", "科技", "财经", "娱乐")
@@ -90,9 +94,20 @@ private fun TabViewPager(mNavController: NavHostController, viewModel: HomeViewM
             modifier = Modifier.padding(top = 4.dp),
             itemSpacing = 2.dp
         ) { page ->
-            val dataState = viewModel.result.observeAsState()
             when (page) {
-                0 -> dataState.value?.let {
+                0 -> viewModel.result.observeAsState().value?.let {
+                    ShowNewsList(mNavController, it.getOrNull()!!.newslist)
+                }
+                1 -> viewModel.resultMilitary.observeAsState().value?.let {
+                    ShowNewsList(mNavController, it.getOrNull()!!.newslist)
+                }
+                2 -> viewModel.resultTechnology.observeAsState().value?.let {
+                    ShowNewsList(mNavController, it.getOrNull()!!.newslist)
+                }
+                3 -> viewModel.resultFinance.observeAsState().value?.let {
+                    ShowNewsList(mNavController, it.getOrNull()!!.newslist)
+                }
+                4 -> viewModel.resultAmusement.observeAsState().value?.let {
                     ShowNewsList(mNavController, it.getOrNull()!!.newslist)
                 }
                 else -> {
@@ -114,9 +129,9 @@ fun ShowNewsList(mNavController: NavHostController, newslist: List<Newslist>) {
         state = rememberLazyListState(),
         modifier = Modifier
             .padding(8.dp)
-            .navigationBarsPadding()
     ) {
         items(newslist) { new ->
+            Log.d("TAG", "ShowNewsList: ${Gson().toJson(newslist)}")
             Row(modifier = Modifier
                 .clickable {
                     val encodedUrl = URLEncoder.encode(new.url, StandardCharsets.UTF_8.toString())
@@ -125,8 +140,13 @@ fun ShowNewsList(mNavController: NavHostController, newslist: List<Newslist>) {
                 .padding(8.dp)
             ) {
                 AsyncImage(
-                    model = new.picUrl,
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(new.picUrl)
+                        .error(R.drawable.placeholder)
+                        .crossfade(true)
+                        .build(),
                     contentDescription = null,
+                    placeholder = painterResource(R.drawable.placeholder),
                     modifier = Modifier
                         .width(120.dp)
                         .height(80.dp),

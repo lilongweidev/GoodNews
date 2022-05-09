@@ -15,4 +15,12 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(repository: HomeRepository) :ViewModel () {
 
     val result = repository.getSocialNews()
+
+    val resultMilitary = repository.getMilitaryNews()
+
+    val resultTechnology = repository.getTechnologyNews()
+
+    val resultFinance = repository.getFinanceNews()
+
+    val resultAmusement = repository.getAmusementNews()
 }

@@ -23,4 +23,30 @@ interface ApiService {
      */
     @GET("/social/index?key=$API_KEY")
     fun getSocialNews(): Call<News>
+
+    /**
+     * 获取军事新闻
+     */
+    @GET("/military/index?key=$API_KEY")
+    fun getMilitaryNews(): Call<News>
+
+    /**
+     * 获取科技新闻
+     */
+    @GET("/keji/index?key=$API_KEY")
+    fun getTechnologyNews(): Call<News>
+
+    /**
+     * 获取财经新闻
+     */
+    @GET("/caijing/index?key=$API_KEY")
+    fun getFinanceNews(): Call<News>
+
+    /**
+     * 获取娱乐新闻
+     */
+    @GET("/huabian/index?key=$API_KEY")
+    fun getAmusementNews(): Call<News>
+
+
 }

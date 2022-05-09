@@ -25,4 +25,39 @@ class HomeRepository @Inject constructor() : BaseRepository() {
         else Result.failure(RuntimeException("getNews response code is ${news.code} msg is ${news.msg}"))
     }
 
+    /**
+     * 获取军事新闻
+     */
+    fun getMilitaryNews() = fire(Dispatchers.IO) {
+        val news = NetworkRequest.getMilitaryNews()
+        if (news.code == CODE) Result.success(news)
+        else Result.failure(RuntimeException("getNews response code is ${news.code} msg is ${news.msg}"))
+    }
+
+    /**
+     * 科技新闻
+     */
+    fun getTechnologyNews() = fire(Dispatchers.IO) {
+        val news = NetworkRequest.getTechnologyNews()
+        if (news.code == CODE) Result.success(news)
+        else Result.failure(RuntimeException("getNews response code is ${news.code} msg is ${news.msg}"))
+    }
+
+    /**
+     * 财经新闻
+     */
+    fun getFinanceNews() = fire(Dispatchers.IO) {
+        val news = NetworkRequest.getFinanceNews()
+        if (news.code == CODE) Result.success(news)
+        else Result.failure(RuntimeException("getNews response code is ${news.code} msg is ${news.msg}"))
+    }
+
+    /**
+     * 娱乐新闻
+     */
+    fun getAmusementNews() = fire(Dispatchers.IO) {
+        val news = NetworkRequest.getAmusementNews()
+        if (news.code == CODE) Result.success(news)
+        else Result.failure(RuntimeException("getNews response code is ${news.code} msg is ${news.msg}"))
+    }
 }

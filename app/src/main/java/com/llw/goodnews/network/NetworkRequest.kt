@@ -25,6 +25,18 @@ object NetworkRequest {
     //获取社会新闻
     suspend fun getSocialNews() = service.getSocialNews().await()
 
+    //获取军事新闻
+    suspend fun getMilitaryNews() = service.getMilitaryNews().await()
+
+    //获取科技新闻
+    suspend fun getTechnologyNews() = service.getTechnologyNews().await()
+
+    //获取财经新闻
+    suspend fun getFinanceNews() = service.getFinanceNews().await()
+
+    //获取娱乐新闻
+    suspend fun getAmusementNews() = service.getAmusementNews().await()
+
     /**
      * Retrofit网络返回处理
      */

@@ -79,7 +79,7 @@ private fun MainScreen(newslistItem: NewslistItem) {
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { "主页面".showToast() },
+            FloatingActionButton(onClick = { mNavController.popBackStack() },
                 contentColor = Color.White,
                 content = { Icon(Icons.Filled.Home, contentDescription = "") })
         },

@@ -7,7 +7,12 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Equalizer
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Sick
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -20,7 +25,9 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.llw.goodnews.ui.BottomBarView
 import com.llw.goodnews.ui.pages.PageConstant.COLLECTION_ITEM
 import com.llw.goodnews.ui.pages.PageConstant.HOME_ITEM
+import com.llw.goodnews.utils.showToast
 import com.llw.goodnews.viewmodel.HomeViewModel
+import kotlinx.coroutines.launch
 
 
 /**
@@ -31,9 +38,14 @@ import com.llw.goodnews.viewmodel.HomeViewModel
 @Composable
 fun HomePage(mNavController: NavHostController, homeViewModel: HomeViewModel) {
     val navController = rememberAnimatedNavController()
+
+    val scaffoldState = rememberScaffoldState()
+    val scope = rememberCoroutineScope()
     Scaffold(
+        scaffoldState = scaffoldState,
         topBar = {
             //顶部应用栏
+            val drawerState = scaffoldState.drawerState
             TopAppBar(
                 title = {
                     Text(
@@ -44,10 +56,27 @@ fun HomePage(mNavController: NavHostController, homeViewModel: HomeViewModel) {
                         maxLines = 1, //单行显示
                         textAlign = TextAlign.Center
                     )
+                },
+                navigationIcon = {
+                    IconButton(onClick = {
+                        scope.launch {
+                            if (drawerState.isClosed) drawerState.open() else drawerState.close()
+                        }
+                    }) {
+                        Icon(Icons.Default.Menu, contentDescription = "Menu")
+                    }
+                },
+                actions = {
+                    IconButton(onClick = {
+                        mNavController.navigate(PageConstant.EPIDEMIC_NEWS_LIST_PAGE)
+                    }) {
+                        Icon(Icons.Default.Sick, contentDescription = "疫情")
+                    }
                 }
             )
         },
         modifier = Modifier.fillMaxSize(),
+        drawerContent = { DrawerView() },
         bottomBar = {
             BottomBarView(navController)
         }
