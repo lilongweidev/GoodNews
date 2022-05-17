@@ -9,7 +9,6 @@ import com.llw.goodnews.db.bean.NewslistItem
  * 转换器
  * @description NewslistItemConverter
  * @author llw
- * @date 2022/4/12 22:36
  */
 class NewslistItemConverter {
 

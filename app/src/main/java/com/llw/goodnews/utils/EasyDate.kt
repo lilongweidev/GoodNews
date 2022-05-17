@@ -8,7 +8,6 @@ import java.util.*
  * EasyDate
  *
  * @author llw
- * @date 2022/4/4 12:50
  */
 object EasyDate {
     private const val STANDARD_TIME = "yyyy-MM-dd HH:mm:ss"

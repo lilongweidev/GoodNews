@@ -12,7 +12,6 @@ import kotlinx.coroutines.runBlocking
  * DataStore工具类
  * @description EasyDataStore
  * @author llw
- * @date 2022/4/4 12:20
  */
 object EasyDataStore {
 

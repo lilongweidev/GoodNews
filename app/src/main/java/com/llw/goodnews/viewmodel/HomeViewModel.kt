@@ -9,7 +9,6 @@ import javax.inject.Inject
 /**
  * HomeViewModel
  * @author llw
- * @date 2022/5/2 12:41
  */
 @HiltViewModel
 class HomeViewModel @Inject constructor(repository: HomeRepository) :ViewModel () {
@@ -23,4 +22,6 @@ class HomeViewModel @Inject constructor(repository: HomeRepository) :ViewModel (
     val resultFinance = repository.getFinanceNews()
 
     val resultAmusement = repository.getAmusementNews()
+
+    val resultCollectionNews = repository.getCollectionNews()
 }

@@ -113,7 +113,7 @@ fun HomePage(mNavController: NavHostController, homeViewModel: HomeViewModel) {
                 HomeItem(mNavController, homeViewModel)
             }
             composable(COLLECTION_ITEM) {
-                CollectionItem()
+                CollectionItem(mNavController, homeViewModel)
             }
         }
     }

@@ -8,7 +8,6 @@ import javax.inject.Inject
 /**
  * MainViewModel
  * @author llw
- * @date 2022/3/29 23:54
  */
 @HiltViewModel
 class MainViewModel @Inject constructor(

@@ -21,8 +21,6 @@ import javax.inject.Inject
 @ViewModelScoped
 class EpidemicNewsRepository @Inject constructor() : BaseRepository() {
 
-    private val TAG = "EpidemicNewsRepository"
-
     companion object {
         lateinit var epidemicNews: EpidemicNews
     }
